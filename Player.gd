@@ -5,11 +5,12 @@ extends CharacterBody3D
 @onready var camera = $Camera3D
 
 # Определение констант для скорости движения и силы прыжка.
-const SPEED = 5.0
-const JUMP_VELOCITY = 4.5
+const SPEED = 10.0
+const JUMP_VELOCITY = 10.0
 
 # Получение значения гравитации из настроек проекта.
-var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+# var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+var gravity = 20.0
 
 # Функция, вызываемая при инициализации узла.
 func _ready():
