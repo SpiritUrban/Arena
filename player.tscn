@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://d0qdtdmm201ok"]
+[gd_scene load_steps=10 format=3 uid="uid://d0qdtdmm201ok"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_7oajf"]
 [ext_resource type="PackedScene" uid="uid://cn7d6nnnebn7" path="res://Pistol.blend" id="2_q0ew8"]
@@ -63,10 +63,57 @@ tracks/1/keys = {
 "values": [Vector3(0, 0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_nv5d0"]
+resource_name = "move"
+loop_mode = 1
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D/Pistol:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
+"transitions": PackedFloat32Array(0.5, 2, 0.5, 2),
+"update": 0,
+"values": [Vector3(0.5, -0.25, -0.5), Vector3(0.423942, -0.224426, -0.5), Vector3(0.5, -0.25, -0.5), Vector3(0.644988, -0.201174, -0.5)]
+}
+
+[sub_resource type="Animation" id="Animation_esacl"]
+resource_name = "shoot"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D/Pistol:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector3(0.5, -0.126341, -0.5), Vector3(0.5, -0.25, -0.5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera3D/Pistol:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector3(0.396312, 0, 0), Vector3(0, 0, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_00hbm"]
 _data = {
 "RESET": SubResource("Animation_vq10c"),
-"idle": SubResource("Animation_45yj6")
+"idle": SubResource("Animation_45yj6"),
+"move": SubResource("Animation_nv5d0"),
+"shoot": SubResource("Animation_esacl")
 }
 
 [node name="Player" type="CharacterBody3D"]
@@ -87,6 +134,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.63323, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -0.25, -0.5)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "idle"
 libraries = {
 "": SubResource("AnimationLibrary_00hbm")
 }
