@@ -3,6 +3,8 @@ extends CharacterBody3D
 
 # Инициализация ссылки на камеру, когда узел добавлен в сцену.
 @onready var camera = $Camera3D
+@onready var anim_player = $AnimationPlayer
+
 
 # Определение констант для скорости движения и силы прыжка.
 const SPEED = 10.0
@@ -24,7 +26,10 @@ func _unhandled_input(event):
 		rotate_y(-event.relative.x * .005)
 		camera.rotate_x(-event.relative.y * .005)
 		camera.rotation.x = clamp(camera.rotation.x, -PI/2, PI/2)
-
+	
+	if Input.is_action_just_pressed("shoot") \
+			and anim_player.current_animation != "shoot":
+		play_shoot_effects()
 # Функция, вызываемая на каждом физическом шаге обновления.
 func _physics_process(delta):
 	# Применяем гравитацию, если персонаж не на полу.
@@ -44,6 +49,17 @@ func _physics_process(delta):
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
+		
+	if anim_player.current_animation == "shoot":
+		pass
+	elif input_dir != Vector2.ZERO and is_on_floor():
+		anim_player.play("move")
+	else:
+		anim_player.play("idle")
 
 	# Обновляем положение персонажа на основе его скорости.
 	move_and_slide()
+
+func play_shoot_effects():
+	anim_player.stop()
+	anim_player.play("shoot")
