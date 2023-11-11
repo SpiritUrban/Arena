@@ -1,3 +1,7 @@
+RayCast3D
+TextureRect
+MultiplayerSynchronizer
+MultiplayerSpawner
 LineEdit
 Button
 Label
