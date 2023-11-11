@@ -1,2 +1,9 @@
+LineEdit
+Button
+Label
+VBoxContainer
+MarginContainer
+PanelContainer
+CanvasLayer
 GPUParticles3D
 AnimationPlayer
